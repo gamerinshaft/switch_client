@@ -17,11 +17,8 @@
     <ons-page modifier="material" ng-controller="SignupController as signup">
       <ons-toolbar modifier="material">
         <div class="left">
-          <ons-toolbar-button ng-click="menu.open()" modifier="material">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
+          ユーザー登録
         </div>
-        <div class="center">ユーザー登録</div>
       </ons-toolbar>
 
       <div class="signup-form">
@@ -32,16 +29,12 @@
         <br>
         <input id="password" type="password" class="text-input--underbar" placeholder="pasword" value="">
         <br>
-        <input id="auth_token" type="hidden" class="text-input--underbar" value="">
+        <input id="password_confirm" type="password" class="text-input--underbar" placeholder="pasword（確認用）" value="">
         <br><br>
-        <ons-button modifier="material" class="go-button" ng-click="signup_url.newSiteUrl()">GO !</ons-button>
+        <ons-button modifier="material" class="go-button" ng-click="signup.createUser()">登録</ons-button>
         <br><br>
       </div>
 
-      <ons-fab position="bottom right" ng-click="signup.newsignup()">
-        <ons-ripple color="rgba(255, 255, 255, 0.2)"></ons-ripple>
-        <ons-icon icon="md-plus" size="24px" style="line-height: 56px;"></ons-icon>
-      </ons-fab>
     </ons-page>
   </ons-template>
 </ons-navigator>
