@@ -7,8 +7,38 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,700,700italic,500italic' rel='stylesheet' type='text/css'>
     <title>Switch</title>
-
-    <script>location.href = "angular/material.html"</script>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script>
+      console.log("hoge")
+      if(localStorage.getItem('switch-site_url')){
+        if(!localStorage.getItem('switch-auth_token')){
+            location.href="angular/login.html"
+        }else{
+          site_url= localStorage.getItem('switch-site_url')
+          auth_token=localStorage.getItem('switch-auth_token')
+          $.ajax({
+            url: site_url + "/api/v1/user/info.json",
+            type: "GET",
+            data: {
+              "auth_token": auth_token,
+            },
+            success: function(msg){
+              location.href="angular/infrared_groups.html"
+            },
+            error: function(msg){
+              console.log(msg)
+              if(msg.status = 404){
+                location.href="angular/404.html"
+              }else{
+                location.href="angular/signup.html"
+              }
+            }
+          });
+        }
+      }else{
+        location.href="angular/404.html"
+      }
+    </script>
 </head>
 
 <body>
