@@ -1,5 +1,17 @@
 (function() {
   angular.module('app', ['onsen'])
+  .factory('currentlyUserModel', function(){
+    return {
+      user: {
+        id: 0,
+        screen_name: "ななし",
+        email: "nanashi@example.com",
+        user_id: 0,
+        created_at: "2015-12-13T06:55:11.893Z",
+        updated_at: "2015-12-13T06:55:11.893Z"
+      }
+    }
+  })
   .factory('todoModel', function(){
     return {
       items: [{
@@ -24,6 +36,39 @@
       }]
     }
   })
+  .controller('LandingController', function($scope, $timeout) {
+    if(localStorage.getItem('switch-site_url')){
+      if(!localStorage.getItem('switch-auth_token')){
+          app.navi.pushPage("angular/login.html", {animation: 'slide'})
+      }else{
+        site_url= localStorage.getItem('switch-site_url')
+        auth_token=localStorage.getItem('switch-auth_token')
+        $.ajax({
+          url: site_url + "/api/v1/user/info.json",
+          type: "GET",
+          data: {
+            "auth_token": auth_token,
+          },
+          success: function(msg){
+            app.navi.pushPage("angular/infrared_groups.html", {animation: 'slide'})
+          },
+          error: function(msg){
+            console.log(msg)
+            if(msg.status = 404){
+              app.navi.pushPage("angular/404.html", {animation: 'lift'})
+            }else{
+              app.navi.pushPage("angular/signup.html", {animation: 'slide'})
+            }
+          }
+        });
+      }
+    }else{
+      app.navi.pushPage("angular/404.html", {animation: 'lift'})
+    }
+  })
+  .controller('SignupController', function($scope, $timeout) {
+    console.log("kita")
+  })
   .controller('ErrorUrlController', function($scope, $timeout) {
 
     this.newSiteUrl = function() {
@@ -37,7 +82,7 @@
           localStorage.setItem("switch-site_url", "" + site_url)
           localStorage.setItem("switch-auth_token",msg["response"]["auth_token"]);
           console.log("success")
-          location.href = "./signup.html"
+          app.navi.pushPage("./signup.html", { animation: "slide" });
         },
         error: function(error){
           if(error.status == 404 || error.status == 0){
