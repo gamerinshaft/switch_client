@@ -1,0 +1,33 @@
+<ons-splitter>
+  <ons-splitter-side var="menu" side="left" width="80%" collapse swipeable>
+    <ons-page modifier="material">
+      <ons-list modifier="material">
+        <ons-list-header modifier="material">Menu</ons-list-header>
+        <ons-list-item modifier="material">
+          This is a menu.
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </ons-splitter-side>
+  <ons-splitter-content page="404.html"></ons-splitter-content>
+</ons-splitter>
+
+<ons-template id="404.html">
+  <ons-page modifier="material" ng-controller="ErrorUrlController as error_url">
+    <ons-toolbar modifier="material">
+      <div class="left">
+        <ons-toolbar-button ng-click="menu.open()" modifier="material">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">404</div>
+    </ons-toolbar>
+    <div class="error-form">
+      <span id="error_messages"></span>
+      <input id="url" type="text" class="text-input--underbar" placeholder="Site URL" value="">
+      <br><br>
+      <ons-button modifier="material" class="go-button" ng-click="error_url.newSiteUrl()">GO !</ons-button>
+      <br><br>
+    </div>
+  </ons-page>
+</ons-template>

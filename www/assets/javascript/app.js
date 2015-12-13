@@ -39,7 +39,7 @@
   .controller('LandingController', function($scope, $timeout) {
     if(localStorage.getItem('switch-site_url')){
       if(!localStorage.getItem('switch-auth_token')){
-          app.navi.pushPage("angular/login.html", {animation: 'slide'})
+          app.navi.pushPage("./login.html", {animation: 'slide'})
       }else{
         site_url= localStorage.getItem('switch-site_url')
         auth_token=localStorage.getItem('switch-auth_token')
@@ -50,20 +50,20 @@
             "auth_token": auth_token,
           },
           success: function(msg){
-            app.navi.pushPage("angular/infrared_groups.html", {animation: 'slide'})
+            app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
           },
           error: function(msg){
             console.log(msg)
             if(msg.status = 404){
-              app.navi.pushPage("angular/404.html", {animation: 'lift'})
+              app.navi.pushPage("./404/index.html", {animation: 'lift'})
             }else{
-              app.navi.pushPage("angular/signup.html", {animation: 'slide'})
+              app.navi.pushPage("./signup/index.html", {animation: 'slide'})
             }
           }
         });
       }
     }else{
-      app.navi.pushPage("angular/404.html", {animation: 'lift'})
+      app.navi.pushPage("./404/index.html", {animation: 'lift'})
     }
   })
   .controller('SignupController', function($scope, $timeout) {
