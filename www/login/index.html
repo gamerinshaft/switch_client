@@ -1,0 +1,37 @@
+<ons-navigator var="app.navi">
+  <ons-splitter>
+    <ons-splitter-side var="menu" side="left" width="80%" collapse swipeable>
+      <ons-page modifier="material">
+        <ons-list modifier="material">
+          <ons-list-header modifier="material">Menu</ons-list-header>
+          <ons-list-item modifier="material">
+            This is a menu.
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content page="login/index.html"></ons-splitter-content>
+  </ons-splitter>
+
+  <ons-template id="login/index.html">
+    <ons-page modifier="material" ng-controller="LoginController as login">
+      <ons-toolbar modifier="material">
+        <div class="left">
+          ログイン
+        </div>
+      </ons-toolbar>
+
+      <div class="login-form">
+        <span id="error_messages"></span>
+        <input id="email_or_screen_name" type="text" class="text-input--underbar" placeholder="ユーザー名またはメールアドレス" value="">
+        <br>
+        <input id="login-password" type="password" class="text-input--underbar" placeholder="password" value="">
+        <br><br>
+        <ons-button modifier="material" class="user-button" ng-click="login.user()">ログイン</ons-button>
+        <br><br>
+      </div>
+
+    </ons-page>
+  </ons-template>
+</ons-navigator>
+
