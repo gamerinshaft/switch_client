@@ -1,8 +1,8 @@
 (function() {
   angular.module('app', ['onsen'])
-  .controller('TodoController', function($scope, $timeout) {
-    this.items = [
-      {
+  .factory('todoModel', function(){
+    return {
+      items: [{
         title: 'Water the plants',
         done: false,
       },
@@ -21,11 +21,40 @@
       {
         title: 'Play tennis',
         done: true,
-      }
-    ]
+      }]
+    }
+  })
+  .controller('TodoController', function($scope, $timeout, todoModel) {
+    $scope.todoModel = todoModel;
+    // this.items = [
+    //   {
+    //     title: 'Water the plants',
+    //     done: false,
+    //   },
+    //   {
+    //     title: 'Walk the dog',
+    //     done: true,
+    //   },
+    //   {
+    //     title: 'Go to the dentist',
+    //     done: false,
+    //   },
+    //   {
+    //     title: 'Buy milk',
+    //     done: false,
+    //   },
+    //   {
+    //     title: 'Play tennis',
+    //     done: true,
+    //   }
+    // ]
 
     this.newTodo = function() {
-      this.items.push({
+      // this.items.push({
+      //   title: '',
+      //   done: false
+      // });
+      todoModel.items.push({
         title: '',
         done: false
       });
@@ -40,7 +69,10 @@
     }
 
     this.clearCompleted = function() {
-      this.items = this.items.filter(function(item) {
+      // this.items = this.items.filter(function(item) {
+      //   return !item.done;
+      // });
+      todoModel.items = todoModel.items.filter(function(item) {
         return !item.done;
       });
     }.bind(this);
