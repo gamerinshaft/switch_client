@@ -41,12 +41,12 @@
             <ons-icon icon="md-menu"></ons-icon>
           </ons-toolbar-button>
         </div>
-        <div class="center">Todos</div>
+        <div class="center">赤外線グループ一覧</div>
       </ons-toolbar>
 
       <ons-list modifier="material">
         <ons-list-header modifier="material">Things to do</ons-list-header>
-        <ons-list-item modifier="material" ng-repeat="item in todo.items">
+        <ons-list-item modifier="material" ng-repeat="item in todoModel.items">
           <label class="checkbox checkbox--material">
             <input type="checkbox" ng-model="item.done" class="checkbox__input checkbox--material__input">
             <div class="checkbox__checkmark checkbox--material__checkmark"></div>
