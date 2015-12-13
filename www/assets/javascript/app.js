@@ -54,7 +54,7 @@
           },
           error: function(msg){
             console.log(msg)
-            if(msg.status = 404){
+            if(msg.status == 404){
               app.navi.pushPage("./404/index.html", {animation: 'lift'})
             }else{
               app.navi.pushPage("./signup/index.html", {animation: 'slide'})
@@ -67,7 +67,18 @@
     }
   })
   .controller('SignupController', function($scope, $timeout) {
-    console.log("kita")
+    console.log("kitayo")
+    this.createUser = function() {
+      if($("#password").val != $("#password_confirm")){
+        ons.notification.alert({
+          message: 'パスワードが確認用と一致しません'
+        });
+      }else{
+        screen_name = $("#screen_name");
+        email = $("#email");
+        password = $("#password");
+      }
+    }
   })
   .controller('ErrorUrlController', function($scope, $timeout) {
 
@@ -81,20 +92,23 @@
         success: function(msg){
           localStorage.setItem("switch-site_url", "" + site_url)
           localStorage.setItem("switch-auth_token",msg["response"]["auth_token"]);
-          console.log("success")
-          app.navi.pushPage("./signup.html", { animation: "slide" });
+          app.navi.pushPage("./signup/index.html", { animation: "slide" });
         },
         error: function(error){
           if(error.status == 404 || error.status == 0){
+            ons.notification.alert({
+              message: '入力したURLが間違っています。'
+            });
             localStorage.setItem("switch-site_url","")
-            $("#error_messages").html("<ul><li class='error'>URLが誤っています</li></ul>");
           }else{
             text = "<ul>";
             messages = error.responseJSON.meta.errors.forEach(function(err){
               text += "<li class='error'>" + err.message + "</li>";
             });
             text += "</ul>"
-            $("#error_messages").html(text);
+            ons.notification.alert({
+              message: text
+            });
           }
         }
       });
