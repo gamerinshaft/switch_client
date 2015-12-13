@@ -6,7 +6,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,700,700italic,500italic' rel='stylesheet' type='text/css'>
-    <title>Onsen UI 2.0 Quickstart</title>
+    <title>Switch</title>
 
     <link rel="stylesheet" href="../lib/onsenui/css/onsenui.css" type="text/css" media="all" />
     <link rel="stylesheet" href="../lib/onsenui/css/onsen-css-components.css" type="text/css" media="all" />
@@ -31,11 +31,11 @@
         </ons-list>
       </ons-page>
     </ons-splitter-side>
-    <ons-splitter-content page="todo.html"></ons-splitter-content>
+    <ons-splitter-content page="404.html"></ons-splitter-content>
   </ons-splitter>
 
-  <ons-template id="todo.html">
-    <ons-page modifier="material" ng-controller="TodoController as todo">
+  <ons-template id="404.html">
+    <ons-page modifier="material" ng-controller="ErrorUrlController as error_url">
       <ons-toolbar modifier="material">
         <div class="left">
           <ons-toolbar-button ng-click="menu.open()" modifier="material">
@@ -44,29 +44,13 @@
         </div>
         <div class="center">404</div>
       </ons-toolbar>
-
-      <ons-list modifier="material">
-        <ons-list-header modifier="material">Things to do</ons-list-header>
-        <ons-list-item modifier="material" ng-repeat="item in todoModel.items">
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" ng-model="item.done" class="checkbox__input checkbox--material__input">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-          </label>
-          <ons-material-input label="Title" type="text" ng-show="todo.selectedItem == $index" ng-model="item.title" ng-blur="todo.selectedItem = -1"></ons-material-input>
-          <span id="todo-title" class="title" ng-class="{ 'done': item.done }" ng-hide="todo.selectedItem == $index" ng-click="todo.selectedItem = $index; todo.focusInput($event)">{{ item.title || 'Untitled item' }}</span>
-        </ons-list-item>
-        <ons-list-item style="text-align: center;">
-          <ons-button ng-click="todo.clearCompleted()" modifier="material--flat">
-          <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
-          Clear completed items
-        </ons-button>
-        </ons-list-item>
-      </ons-list>
-
-      <ons-fab position="bottom right" ng-click="todo.newTodo()">
-        <ons-ripple color="rgba(255, 255, 255, 0.2)"></ons-ripple>
-        <ons-icon icon="md-plus" size="24px" style="line-height: 56px;"></ons-icon>
-      </ons-fab>
+      <div class="login-form">
+        <span id="error_messages"></span>
+        <input id="url" type="text" class="text-input--underbar" placeholder="Site URL" value="">
+        <br><br>
+        <ons-button modifier="material" class="go-button" ng-click="error_url.newSiteUrl()">GO !</ons-button>
+        <br><br>
+      </div>
     </ons-page>
   </ons-template>
 </body>

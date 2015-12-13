@@ -24,6 +24,38 @@
       }]
     }
   })
+  .controller('ErrorUrlController', function($scope, $timeout) {
+
+    this.newSiteUrl = function() {
+      console.log("hoge")
+      site_url = $("#url").val()
+      console.log(site_url)
+      $.ajax({
+        url: "" + site_url + "/api/v1/auth/token.json",
+        type:"GET",
+        success: function(msg){
+          localStorage.setItem("switch-site_url", "" + site_url)
+          localStorage.setItem("switch-auth_token",msg["response"]["auth_token"]);
+          console.log("success")
+          location.href = "./signup.html"
+        },
+        error: function(error){
+          if(error.status == 404 || error.status == 0){
+            localStorage.setItem("switch-site_url","")
+            $("#error_messages").html("<ul><li class='error'>URLが誤っています</li></ul>");
+          }else{
+            text = "<ul>";
+            messages = error.responseJSON.meta.errors.forEach(function(err){
+              text += "<li class='error'>" + err.message + "</li>";
+            });
+            text += "</ul>"
+            $("#error_messages").html(text);
+          }
+        }
+      });
+    }.bind(this);
+
+  })
   .controller('TodoController', function($scope, $timeout, todoModel) {
     $scope.todoModel = todoModel;
     // this.items = [
