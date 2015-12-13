@@ -82,7 +82,7 @@
   .controller('LandingController', function($scope, $timeout) {
     if(localStorage.getItem('switch-site_url')){
       if(!localStorage.getItem('switch-auth_token')){
-          app.navi.pushPage("./login.html", {animation: 'slide'})
+          app.navi.pushPage("./login/index.html", {animation: 'slide'})
       }else{
         site_url= localStorage.getItem('switch-site_url')
         auth_token=localStorage.getItem('switch-auth_token')
@@ -111,7 +111,6 @@
     }
   })
   .controller('SignupController', function($scope, $timeout) {
-    console.log("kitayo")
     this.createUser = function() {
       if($("#password").val() != $("#password_confirm").val()){
         ons.notification.alert({
@@ -122,38 +121,72 @@
         email = $("#email").val();
         password = $("#password").val();
         $.ajax({
-              url: "" + localStorage.getItem("switch-site_url") + "/api/v1/auth/signup.json",
-              type: "POST",
-              data: {
-                "screen_name": screen_name,
-                "email": email,
-                "password": password,
-                "auth_token": localStorage.getItem("switch-auth_token")
-              },
-              success: function(msg){
-                app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
-              },
-              error: function(error){
-                if(error.status == 404){
-                  localStorage.setItem("switch-site_url","")
-                  app.navi.pushPage("./404/index.html", {animation: 'lift'})
-                }else{
-                  html = "<ul>";
-                  messages = error.responseJSON.meta.errors.forEach(function(err){
-                    html += "<li class='error'>" + err.message + "</li>";
-                  });
-                  html += "</ul>"
-                  ons.notification.alert({
-                    messageHTML: html
-                  });
-                }
-              }
-            });
+          url: "" + localStorage.getItem("switch-site_url") + "/api/v1/auth/signup.json",
+          type: "POST",
+          data: {
+            "screen_name": screen_name,
+            "email": email,
+            "password": password,
+            "auth_token": localStorage.getItem("switch-auth_token")
+          },
+          success: function(msg){
+            app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
+          },
+          error: function(error){
+            if(error.status == 404){
+              localStorage.setItem("switch-site_url","")
+              app.navi.pushPage("./404/index.html", {animation: 'lift'})
+            }else{
+              html = "<ul>";
+              messages = error.responseJSON.meta.errors.forEach(function(err){
+                html += "<li class='error'>" + err.message + "</li>";
+              });
+              html += "</ul>"
+              ons.notification.alert({
+                messageHTML: html
+              });
+            }
+          }
+        });
       }
     }
   })
-  .controller('ErrorUrlController', function($scope, $timeout) {
+  .controller('LoginController', function($scope, $timeout) {
+    this.user = function() {
+      email_or_screen_name = $("#email_or_screen_name").val();
+      password = $("#login-password").val();
+      $.ajax({
+        url: "" + localStorage.getItem("switch-site_url") + "/api/v1/auth/login.json",
+        type: "POST",
+        data: {
+          "email_or_screen_name": email_or_screen_name,
+          "password": password
+        },
+        success: function(msg){
+          localStorage.setItem("switch-auth_token", msg["response"]["auth_token"] )
+          app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
+        },
+        error: function(error){
+          if(error.status == 404){
+            localStorage.setItem("switch-site_url","")
+            app.navi.pushPage("./404/index.html", {animation: 'lift'})
+          }else{
+            console.log(error)
+            html = "<ul>";
+            messages = error.responseJSON.meta.errors.forEach(function(err){
+              html += "<li class='error'>" + err.message + "</li>";
+            });
+            html += "</ul>"
+            ons.notification.alert({
+              messageHTML: html
+            });
+          }
+        }
+      });
 
+    }
+  })
+  .controller('ErrorUrlController', function($scope, $timeout) {
     this.newSiteUrl = function() {
       console.log("hoge")
       site_url = $("#url").val()
