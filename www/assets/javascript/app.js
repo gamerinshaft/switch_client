@@ -55,6 +55,7 @@
           error: function(msg){
             console.log(msg)
             if(msg.status == 404){
+              localStorage.setItem("switch-site_url","")
               app.navi.pushPage("./404/index.html", {animation: 'lift'})
             }else{
               app.navi.pushPage("./signup/index.html", {animation: 'slide'})
@@ -69,14 +70,42 @@
   .controller('SignupController', function($scope, $timeout) {
     console.log("kitayo")
     this.createUser = function() {
-      if($("#password").val != $("#password_confirm")){
+      if($("#password").val() != $("#password_confirm").val()){
         ons.notification.alert({
           message: 'パスワードが確認用と一致しません'
         });
       }else{
-        screen_name = $("#screen_name");
-        email = $("#email");
-        password = $("#password");
+        screen_name = $("#screen_name").val();
+        email = $("#email").val();
+        password = $("#password").val();
+        $.ajax({
+              url: "" + localStorage.getItem("switch-site_url") + "/api/v1/auth/signup.json",
+              type: "POST",
+              data: {
+                "screen_name": screen_name,
+                "email": email,
+                "password": password,
+                "auth_token": localStorage.getItem("switch-auth_token")
+              },
+              success: function(msg){
+                app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
+              },
+              error: function(error){
+                if(error.status == 404){
+                  localStorage.setItem("switch-site_url","")
+                  app.navi.pushPage("./404/index.html", {animation: 'lift'})
+                }else{
+                  html = "<ul>";
+                  messages = error.responseJSON.meta.errors.forEach(function(err){
+                    html += "<li class='error'>" + err.message + "</li>";
+                  });
+                  html += "</ul>"
+                  ons.notification.alert({
+                    messageHTML: html
+                  });
+                }
+              }
+            });
       }
     }
   })
