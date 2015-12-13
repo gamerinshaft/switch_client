@@ -36,6 +36,49 @@
       }]
     }
   })
+  .controller('MenuController', function($scope, $timeout){
+    this.logout = function(){
+      ons.notification.confirm({
+        message: 'ログアウトしますか？',
+        callback: function(answer) {
+          switch(answer){
+            case 0:
+              break;
+            case 1:
+              auth_token=localStorage.getItem('switch-auth_token')
+              $.ajax({
+                url: site_url + "/api/v1/auth/logout.json",
+                type: "DELETE",
+                data: {
+                  "auth_token": auth_token,
+                },
+                success: function(msg){
+                  localStorage.setItem("switch-auth_token","")
+                  app.navi.pushPage("./login/index.html", {animation: 'fade'})
+                },
+                error: function(error){
+                  console.log(error)
+                  if(error.status == 404){
+                    localStorage.setItem("switch-site_url","")
+                    app.navi.pushPage("./404/index.html", {animation: 'lift'})
+                  }else{
+                    html = "<ul>";
+                    messages = error.responseJSON.meta.errors.forEach(function(err){
+                      html += "<li class='error'>" + err.message + "</li>";
+                    });
+                    html += "</ul>"
+                    ons.notification.alert({
+                      messageHTML: html
+                    });
+                  }
+                }
+              });
+              break;
+          }
+        }
+      });
+    }
+  })
   .controller('LandingController', function($scope, $timeout) {
     if(localStorage.getItem('switch-site_url')){
       if(!localStorage.getItem('switch-auth_token')){
