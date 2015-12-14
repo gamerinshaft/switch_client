@@ -34,6 +34,12 @@
         <ons-button modifier="material" class="go-button" ng-click="signup.createUser()">登録</ons-button>
         <br><br>
       </div>
+      <ons-list-item style="text-align: center;">
+        <ons-button onclick="app.navi.resetToPage('./login/index.html', {animation: 'slide'})" modifier="material--flat">
+          <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
+          サインインはこちら
+        </ons-button>
+      </ons-list-item>
 
     </ons-page>
   </ons-template>
