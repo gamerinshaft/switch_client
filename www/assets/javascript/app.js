@@ -192,10 +192,8 @@
         },
         error: function(error){
           if(error.status == 404 || error.status == 0){
-            ons.notification.alert({
-              message: '入力したURLが間違っています。'
-            });
             localStorage.setItem("switch-site_url","")
+            app.navi.resetToPage("./404/index.html", {animation: 'lift'})
           }else{
             text = "<ul>";
             messages = error.responseJSON.meta.errors.forEach(function(err){
@@ -233,10 +231,8 @@
           },
           error: function(error){
             if(error.status == 404 || error.status == 0){
-              ons.notification.alert({
-                message: '入力したURLが間違っています。'
-              });
               localStorage.setItem("switch-site_url","")
+              app.navi.resetToPage("./404/index.html", {animation: 'lift'})
             }else{
               text = "<ul>";
               messages = error.responseJSON.meta.errors.forEach(function(err){
@@ -268,10 +264,8 @@
           },
           error: function(error){
             if(error.status == 404 || error.status == 0){
-              ons.notification.alert({
-                message: '入力したURLが間違っています。'
-              });
               localStorage.setItem("switch-site_url","")
+              app.navi.resetToPage("./404/index.html", {animation: 'lift'})
             }else{
               text = "<ul>";
               messages = error.responseJSON.meta.errors.forEach(function(err){
@@ -286,6 +280,34 @@
         });
       }
     })
+    this.send = function(ir_id){
+      $.ajax({
+        url: "" + site_url + "/api/v1/ir/send.json",
+        type:"POST",
+        data: {
+          "auth_token": localStorage.getItem('switch-auth_token'),
+          "ir_id": ir_id
+        },
+        success: function(msg){
+          console.log(msg)
+        },
+        error: function(error){
+          if(error.status == 404 || error.status == 0){
+            localStorage.setItem("switch-site_url","")
+            app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+          }else{
+            text = "<ul>";
+            messages = error.responseJSON.meta.errors.forEach(function(err){
+              text += "<li class='error'>" + err.message + "</li>";
+            });
+            text += "</ul>"
+            ons.notification.alert({
+              message: text
+            });
+          }
+        }
+      });
+    }.bind(this)
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
     $scope.infraredGroupModel = infraredGroupModel;
@@ -306,10 +328,8 @@
       },
       error: function(error){
         if(error.status == 404 || error.status == 0){
-          ons.notification.alert({
-            message: '入力したURLが間違っています。'
-          });
           localStorage.setItem("switch-site_url","")
+          app.navi.resetToPage("./404/index.html", {animation: 'lift'})
         }else{
           text = "<ul>";
           messages = error.responseJSON.meta.errors.forEach(function(err){
