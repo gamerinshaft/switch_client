@@ -37,6 +37,7 @@
     }
   })
   .controller('MenuController', function($scope, $timeout){
+    site_url= localStorage.getItem('switch-site_url')
     this.logout = function(){
       ons.notification.confirm({
         message: 'ログアウトしますか？',
@@ -54,13 +55,13 @@
                 },
                 success: function(msg){
                   localStorage.setItem("switch-auth_token","")
-                  app.navi.pushPage("./login/index.html", {animation: 'fade'})
+                  app.navi.resetToPage("./login/index.html", {animation: 'fade'})
                 },
                 error: function(error){
                   console.log(error)
                   if(error.status == 404){
                     localStorage.setItem("switch-site_url","")
-                    app.navi.pushPage("./404/index.html", {animation: 'lift'})
+                    app.navi.resetToPage("./404/index.html", {animation: 'lift'})
                   }else{
                     html = "<ul>";
                     messages = error.responseJSON.meta.errors.forEach(function(err){
@@ -82,7 +83,7 @@
   .controller('LandingController', function($scope, $timeout) {
     if(localStorage.getItem('switch-site_url')){
       if(!localStorage.getItem('switch-auth_token')){
-          app.navi.pushPage("./login/index.html", {animation: 'slide'})
+          app.navi.resetToPage("./login/index.html", {animation: 'slide'})
       }else{
         site_url= localStorage.getItem('switch-site_url')
         auth_token=localStorage.getItem('switch-auth_token')
@@ -99,7 +100,7 @@
             console.log(msg)
             if(msg.status == 404){
               localStorage.setItem("switch-site_url","")
-              app.navi.pushPage("./404/index.html", {animation: 'lift'})
+              app.navi.pushToPage("./404/index.html", {animation: 'lift'})
             }else{
               app.navi.pushPage("./signup/index.html", {animation: 'slide'})
             }
@@ -107,7 +108,7 @@
         });
       }
     }else{
-      app.navi.pushPage("./404/index.html", {animation: 'lift'})
+      app.navi.pushToPage("./404/index.html", {animation: 'lift'})
     }
   })
   .controller('SignupController', function($scope, $timeout) {
@@ -135,7 +136,7 @@
           error: function(error){
             if(error.status == 404){
               localStorage.setItem("switch-site_url","")
-              app.navi.pushPage("./404/index.html", {animation: 'lift'})
+              app.navi.resetToPage("./404/index.html", {animation: 'lift'})
             }else{
               html = "<ul>";
               messages = error.responseJSON.meta.errors.forEach(function(err){
@@ -154,7 +155,7 @@
   .controller('LoginController', function($scope, $timeout) {
     this.user = function() {
       email_or_screen_name = $("#email_or_screen_name").val();
-      password = $("#login-password").val();
+      password = $("#password").val();
       $.ajax({
         url: "" + localStorage.getItem("switch-site_url") + "/api/v1/auth/login.json",
         type: "POST",
@@ -169,7 +170,7 @@
         error: function(error){
           if(error.status == 404){
             localStorage.setItem("switch-site_url","")
-            app.navi.pushPage("./404/index.html", {animation: 'lift'})
+            app.navi.resetToPage("./404/index.html", {animation: 'lift'})
           }else{
             console.log(error)
             html = "<ul>";
@@ -197,7 +198,7 @@
         success: function(msg){
           localStorage.setItem("switch-site_url", "" + site_url)
           localStorage.setItem("switch-auth_token",msg["response"]["auth_token"]);
-          app.navi.pushPage("./signup/index.html", { animation: "slide" });
+          app.navi.resetToPage("./signup/index.html", { animation: "slide" });
         },
         error: function(error){
           if(error.status == 404 || error.status == 0){
