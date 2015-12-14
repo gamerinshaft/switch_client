@@ -16,19 +16,19 @@
 </ons-splitter>
 
 <ons-template id="home/index.html">
-  <ons-page modifier="material" ng-controller="TodoController as todo">
+  <ons-page modifier="material" ng-controller="InfraredGroupController as ir">
     <ons-toolbar modifier="material">
       <div class="left">
         <ons-toolbar-button ng-click="menu.open()" modifier="material">
           <ons-icon icon="md-menu"></ons-icon>
         </ons-toolbar-button>
       </div>
-      <div class="center">赤外線グループ一覧</div>
+      <div class="center">Switch</div>
     </ons-toolbar>
 
     <ons-list modifier="material">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
-      <ons-list-item modifier="material" ng-repeat="item in todoModel.items">
+      <ons-list-item modifier="material" ng-repeat="item in infraredGroupModel.items">
         <label class="checkbox checkbox--material">
           <input type="checkbox" ng-model="item.done" class="checkbox__input checkbox--material__input">
           <div class="checkbox__checkmark checkbox--material__checkmark"></div>

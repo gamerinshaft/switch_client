@@ -12,7 +12,7 @@
       }
     }
   })
-  .factory('todoModel', function(){
+  .factory('infraredGroupModel', function(){
     return {
       items: [{
         title: 'Water the plants',
@@ -221,37 +221,14 @@
     }.bind(this);
 
   })
-  .controller('TodoController', function($scope, $timeout, todoModel) {
-    $scope.todoModel = todoModel;
-    // this.items = [
-    //   {
-    //     title: 'Water the plants',
-    //     done: false,
-    //   },
-    //   {
-    //     title: 'Walk the dog',
-    //     done: true,
-    //   },
-    //   {
-    //     title: 'Go to the dentist',
-    //     done: false,
-    //   },
-    //   {
-    //     title: 'Buy milk',
-    //     done: false,
-    //   },
-    //   {
-    //     title: 'Play tennis',
-    //     done: true,
-    //   }
-    // ]
-
-    this.newTodo = function() {
+  .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
+    $scope.infraredGroupModel = infraredGroupModel;
+    this.newIr = function() {
       // this.items.push({
       //   title: '',
       //   done: false
       // });
-      todoModel.items.push({
+      infraredGroupModel.items.push({
         title: '',
         done: false
       });
@@ -269,7 +246,7 @@
       // this.items = this.items.filter(function(item) {
       //   return !item.done;
       // });
-      todoModel.items = todoModel.items.filter(function(item) {
+      infraredGroupModel.items = infraredGroupModel.items.filter(function(item) {
         return !item.done;
       });
     }.bind(this);
