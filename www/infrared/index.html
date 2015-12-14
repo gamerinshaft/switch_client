@@ -16,7 +16,7 @@
 </ons-splitter>
 
 <ons-template id="infrared/index.html">
-  <ons-page modifier="material" ng-controller="InfraredGroupController as ir">
+  <ons-page modifier="material" ng-controller="InfraredController as ir">
     <ons-toolbar modifier="material">
       <div class="left">
         <ons-toolbar-button ng-click="menu.open()" modifier="material">
@@ -27,7 +27,7 @@
     </ons-toolbar>
     <ons-progress indeterminate></ons-progress>
     <ons-list modifier="material">
-      <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
+      <ons-list-header modifier="material">{{infraredModel.group.name}}の赤外線一覧</ons-list-header>
       <ons-list-item id="group-{{group.id}}" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">
         <label class="checkbox checkbox--material">
           <input type="checkbox" ng-model="group.done" class="checkbox__input checkbox--material__input">

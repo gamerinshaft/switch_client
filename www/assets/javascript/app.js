@@ -12,6 +12,16 @@
       }
     }
   })
+  .factory('infraredModel', function(){
+     return [{
+      group: {
+        name: "名無し"
+      },
+       infrareds: [{
+
+       }]
+     }]
+  })
   .factory('infraredGroupModel', function(){
     return {
       groups: [{
@@ -83,7 +93,7 @@
           error: function(msg){
             if(msg.status == 404){
               localStorage.setItem("switch-site_url","")
-              app.navi.pushToPage("./404/index.html", {animation: 'lift'})
+              app.navi.pushPage("./404/index.html", {animation: 'lift'})
             }else{
               app.navi.pushPage("./signup/index.html", {animation: 'slide'})
             }
@@ -91,7 +101,7 @@
         });
       }
     }else{
-      app.navi.pushToPage("./404/index.html", {animation: 'lift'})
+      app.navi.pushPage("./404/index.html", {animation: 'lift'})
     }
   })
   .controller('SignupController', function($scope, $timeout) {
@@ -202,6 +212,14 @@
       });
     }.bind(this);
 
+  })
+  .controller('InfraredController', function($scope, $timeout, infraredModel){
+    $timeout(function(){
+      var options = app.navi.getCurrentPage().options;
+      infraredModel.group = options.group
+      console.log(options.group.name)
+    })
+    $scope.infraredModel = infraredModel;
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
     $scope.infraredGroupModel = infraredGroupModel;
