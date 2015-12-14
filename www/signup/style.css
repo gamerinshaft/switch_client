@@ -2,7 +2,7 @@
 	/*width: 200px;*/
 	margin:0 auto;
 	text-align:center;
-	padding-top:160px;
+	padding-top:190px;
 }
 
 #s_signup .button-back{
@@ -13,7 +13,8 @@
 }
 #s_signup .tologin{
 	float:left ;
-	margin-left: 30px;
+	margin-left: 20px;
+	padding-top: 180px;
 }
 
 #s_signup .clear{
