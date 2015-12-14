@@ -25,10 +25,9 @@
       </div>
       <div class="center">Switch</div>
     </ons-toolbar>
-    <ons-progress indeterminate></ons-progress>
     <ons-list modifier="material">
       <ons-list-header modifier="material">{{infraredModel.group.name}}の赤外線一覧</ons-list-header>
-      <ons-list-item id="infrared-{{infrared.id}}" class="infrared" modifier="material" ng-repeat="infrared in infraredModel.infrareds">
+      <ons-list-item id="infrared-{{infrared.id}}" class="infrared" modifier="material" ng-repeat="infrared in infraredModel.infrareds" ng-click='ir.send(infrared.id)'>
         <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
         {{ infrared.name || 'Untitled item' }}
       </ons-list-item>
