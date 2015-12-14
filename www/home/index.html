@@ -25,7 +25,7 @@
       </div>
       <div class="center">Switch</div>
     </ons-toolbar>
-
+    <ons-progress indeterminate></ons-progress>
     <ons-list modifier="material">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
       <ons-list-item id="group-{{group.id}}" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">
@@ -44,7 +44,7 @@
       </ons-list-item>
     </ons-list>
 
-    <ons-fab position="bottom right" ng-click="ir.newIr()">
+    <ons-fab position="bottom right" ng-click="ir.newIrGroup()">
       <ons-ripple color="rgba(255, 255, 255, 0.2)"></ons-ripple>
       <ons-icon icon="md-plus" size="24px" style="line-height: 56px;"></ons-icon>
     </ons-fab>

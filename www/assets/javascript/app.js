@@ -14,7 +14,10 @@
   })
   .factory('infraredGroupModel', function(){
     return {
-      groups: []
+      groups: [{
+        id: "all",
+        name: "すべての赤外線"
+      }]
     }
   })
   .controller('MenuController', function($scope, $timeout){
@@ -169,7 +172,6 @@
   })
   .controller('ErrorUrlController', function($scope, $timeout) {
     this.newSiteUrl = function() {
-      console.log("hoge")
       site_url = $("#url").val()
       console.log(site_url)
       $.ajax({
@@ -202,6 +204,7 @@
 
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
+    $scope.infraredGroupModel = infraredGroupModel;
     $.ajax({
       url: "" + site_url + "/api/v1/group.json",
       type:"GET",
@@ -212,7 +215,9 @@
         window.msg = msg
         console.log(msg)
         $timeout(function() {
-          infraredGroupModel.groups = msg["response"]["groups"]
+          msg["response"]["groups"].forEach(function(obj){
+            infraredGroupModel.groups.push(obj)
+          })
         })
       },
       error: function(error){
@@ -233,15 +238,44 @@
         }
       }
     });
-    $scope.infraredGroupModel = infraredGroupModel;
-    this.newIr = function() {
-      // this.groups.push({
-      //   name: '',
-      //   done: false
-      // });
-      infraredGroupModel.groups.push({
-        name: '',
-        done: false
+    this.newIrGroup = function() {
+      ons.notification.prompt({
+        message: "グループ名を入力してください",
+        modifier: "material",
+        callback: function(name) {
+          $.ajax({
+            url: "" + localStorage.getItem("switch-site_url") + "/api/v1/group.json",
+            type: "POST",
+            data: {
+              "name": name,
+              "auth_token": localStorage.getItem("switch-auth_token")
+            },
+            success: function(msg){
+              $timeout(function(){
+                infraredGroupModel.groups.push(msg["response"]["group"])
+              })
+              ons.notification.alert({
+                message: '' + name + 'を追加しました！',
+                modifier: "material"
+              });
+            },
+            error: function(error){
+              if(error.status == 404){
+                localStorage.setItem("switch-site_url","")
+                app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+              }else{
+                html = "<ul>";
+                messages = error.responseJSON.meta.errors.forEach(function(err){
+                  html += "<li class='error'>" + err.message + "</li>";
+                });
+                html += "</ul>"
+                ons.notification.alert({
+                  messageHTML: html
+                });
+              }
+            }
+          });
+        }
       });
     }.bind(this);
 
@@ -263,5 +297,5 @@
     }.bind(this);
 
     this.selectedItem = -1;
-  });
+  })
 })();
