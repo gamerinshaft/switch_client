@@ -13,13 +13,22 @@
 </ons-splitter>
 
 <ons-template id="404.html">
-  <ons-page modifier="material" ng-controller="ErrorUrlController as error_url">
+  <ons-page modifier="material" ng-controller="ErrorUrlController as error_url" id="s_404">
     <ons-toolbar modifier="material">
       <div class="left">404</div>
     </ons-toolbar>
     <div class="error-form">
-      <span id="error_messages"></span>
-      <input id="url" type="text" class="text-input--underbar" placeholder="Site URL" value="">
+      <div class="logo">
+        <img src="https://robohash.org/my-own-slug.png?size=300x300">
+      </div>
+      <div class="set_message">
+        <p>404 NOT FOUND</p>
+        <p>正しいURLを入力してください</p>
+      </div>
+
+      <div class="input-form">
+        <input id="url" type="text" class="text-input--underbar input-form" placeholder="http://example.com" value="" size="100">
+      </div>
       <br><br>
       <ons-button modifier="material" class="go-button" ng-click="error_url.newSiteUrl()">GO !</ons-button>
       <br><br>

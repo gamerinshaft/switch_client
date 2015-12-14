@@ -1,0 +1,39 @@
+#s_404 .error-form{
+	margin: 0 auto;
+	width:100%;
+	height: 100%;
+}
+
+#s_404 .logo img{
+	width:220px;
+}
+
+#s_404 .logo{
+	padding-top: 60px;
+	padding-bottom:40px;
+	width:220px;
+	margin: 0 auto;
+}
+#s_404 .set_message{
+	margin-top:30px;
+	width:300px;
+	margin: 0 auto;
+	padding-bottom:20px;
+}
+
+#s_404 .set_message p{
+	text-align:center;
+}	
+
+
+#s_404 .input-form{
+	margin: 0 auto;
+	width: 250px;
+}
+
+
+
+#s_404 .go-button{
+	margin-left:290px;
+}
+
