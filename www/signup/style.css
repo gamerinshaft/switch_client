@@ -5,3 +5,17 @@
 	padding-top:160px;
 }
 
+#s_signup .button-back{
+	float:left;
+	width: 100px;
+	text-align:center;
+	margin-left: 64px;
+}
+#s_signup .tologin{
+	float:left ;
+	margin-left: 30px;
+}
+
+#s_signup .clear{
+	clear: both;
+}

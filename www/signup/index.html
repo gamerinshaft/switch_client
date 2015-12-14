@@ -23,23 +23,27 @@
 
       <div class="signup-form">
 
-        <input id="screen_name" type="text" class="text-input--underbar" placeholder="name" value="">
+        <input id="screen_name" type="text" class="text-input--underbar" placeholder="name" value="" size="32">
         <br>
-        <input id="email" type="text" class="text-input--underbar" placeholder="email" value="">
+        <input id="email" type="text" class="text-input--underbar" placeholder="email" value="" size="32">
         <br>
-        <input id="password" type="password" class="text-input--underbar" placeholder="pasword" value="">
+        <input id="password" type="password" class="text-input--underbar" placeholder="pasword" value="" size="32">
         <br>
-        <input id="password_confirm" type="password" class="text-input--underbar" placeholder="pasword（確認用）" value="">
+        <input id="password_confirm" type="password" class="text-input--underbar" placeholder="pasword（確認用）" value="" size="32">
         <br><br><br>
-        <ons-button modifier="material" class="go-button" ng-click="signup.createUser()">登録</ons-button>
-        <br><br>
       </div>
-      <ons-list-item style="text-align: center;">
+      <br>
+      <div class="tologin">
         <ons-button onclick="app.navi.resetToPage('./login/index.html', {animation: 'slide'})" modifier="material--flat">
           <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
           サインインはこちら
         </ons-button>
-      </ons-list-item>
+      </div>
+        <div class="button-back">
+          <ons-button modifier="material" class="go-button" ng-click="signup.createUser()">登録</ons-button>
+        </div>
+      <div class="clear"></div>
+
 
     </ons-page>
   </ons-template>
