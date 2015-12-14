@@ -33,6 +33,7 @@
     this.logout = function(){
       ons.notification.confirm({
         message: 'ログアウトしますか？',
+        modifier: 'material',
         callback: function(answer) {
           switch(answer){
             case 0:
