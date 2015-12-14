@@ -14,7 +14,7 @@
   </ons-splitter>
 
   <ons-template id="signup/index.html">
-    <ons-page modifier="material" ng-controller="SignupController as signup">
+    <ons-page modifier="material" ng-controller="SignupController as signup" id="s_signup">
       <ons-toolbar modifier="material">
         <div class="left">
           ユーザー登録
@@ -22,7 +22,7 @@
       </ons-toolbar>
 
       <div class="signup-form">
-        <span id="error_messages"></span>
+
         <input id="screen_name" type="text" class="text-input--underbar" placeholder="name" value="">
         <br>
         <input id="email" type="text" class="text-input--underbar" placeholder="email" value="">
@@ -30,7 +30,7 @@
         <input id="password" type="password" class="text-input--underbar" placeholder="pasword" value="">
         <br>
         <input id="password_confirm" type="password" class="text-input--underbar" placeholder="pasword（確認用）" value="">
-        <br><br>
+        <br><br><br>
         <ons-button modifier="material" class="go-button" ng-click="signup.createUser()">登録</ons-button>
         <br><br>
       </div>
