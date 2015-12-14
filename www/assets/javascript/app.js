@@ -505,7 +505,7 @@
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
     $scope.infraredGroupModel = infraredGroupModel;
     $.ajax({
-      url: "" + site_url + "/api/v1/group.json",
+      url: "" + localStorage.getItem("switch-site_url") + "/api/v1/group.json",
       type:"GET",
       data: {
         "auth_token": localStorage.getItem('switch-auth_token')
