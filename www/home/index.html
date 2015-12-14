@@ -28,7 +28,7 @@
 
     <ons-list modifier="material">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
-      <ons-list-item class="repeated-list-item" modifier="material" ng-repeat="group in infraredGroupModel.groups">
+      <ons-list-item id="group-{{group.id}}" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">
         <label class="checkbox checkbox--material">
           <input type="checkbox" ng-model="group.done" class="checkbox__input checkbox--material__input">
           <div class="checkbox__checkmark checkbox--material__checkmark"></div>
