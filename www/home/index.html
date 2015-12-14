@@ -29,12 +29,8 @@
     <ons-list modifier="material">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
       <ons-list-item id="group-{{group.id}}" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">
-        <label class="checkbox checkbox--material">
-          <input type="checkbox" ng-model="group.done" class="checkbox__input checkbox--material__input">
-          <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-        </label>
-        <ons-material-input label="Name" type="text" ng-show="ir.selectedItem == $index" ng-model="group.name" ng-blur="ir.selectedItem = -1"></ons-material-input>
-        <span id="ir-name" class="name" ng-class="{ 'done': group.done }" ng-hide="ir.selectedItem == $index" ng-click="ir.selectedItem = $index; ir.focusInput($event)">{{ group.name || 'Untitled item' }}</span>
+        <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
+        {{ group.name || 'Untitled item' }}
       </ons-list-item>
       <ons-list-item style="text-align: center;">
         <ons-button ng-click="ir.clearCompleted()" modifier="material--flat">
