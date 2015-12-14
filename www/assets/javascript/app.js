@@ -94,7 +94,7 @@
             "auth_token": auth_token,
           },
           success: function(msg){
-            app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
+            app.navi.pushPage("./home/index.html", {animation: 'slide'})
           },
           error: function(msg){
             console.log(msg)
@@ -131,7 +131,7 @@
             "auth_token": localStorage.getItem("switch-auth_token")
           },
           success: function(msg){
-            app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
+            app.navi.pushPage("./home/index.html", {animation: 'slide'})
           },
           error: function(error){
             if(error.status == 404){
@@ -165,7 +165,7 @@
         },
         success: function(msg){
           localStorage.setItem("switch-auth_token", msg["response"]["auth_token"] )
-          app.navi.pushPage("./infrared_groups/index.html", {animation: 'slide'})
+          app.navi.pushPage("./home/index.html", {animation: 'slide'})
         },
         error: function(error){
           if(error.status == 404){
