@@ -1,7 +1,7 @@
 #s_login .form-back{
 	width:100%;
 	/*height:80px;*/
-	padding-top:230px;
+	padding-top:200px;
 }
 
 
@@ -18,11 +18,12 @@
 	text-align:center;
 	margin-left: 70px;
 }
-
+#s_login .box{
+	float:left;
+	margin-left:24px;
+}
 #s_login .tosignup{
-	float:left ;
-	margin-left: 24px;
-	padding-top:180px;
+
 }
 
 #s_login .clear{
