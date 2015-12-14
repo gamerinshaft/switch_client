@@ -1,36 +1,3 @@
-
-
-<ons-splitter>
-  <ons-splitter-side var="menu" side="left" width="80%" collapse swipeable>
-    <ons-page modifier="material" ng-controller="MenuController as menu">
-      <ons-list modifier="material">
-        <ons-list-header modifier="material">Menu</ons-list-header>
-        <ons-list-item modifier="material" ng-click="menu.logout()" >
-          ログアウト
-        </ons-list-item>
-        <ons-list-item modifier="material" onclick="app.navi.resetToPage('home/index.html')">
-            home
-        </ons-list-item>
-        <ons-list-item  modifier="material" ng-click="pushPage('')">
-            infrared
-        </ons-list-item>
-        <ons-list-item  modifier="material" ng-click="pushPage('')">
-        a
-        </ons-list-item>
-        <ons-list-item  modifier="material" ng-click="pushPage('')">
-        b
-        </ons-list-item>
-        <ons-list-item  modifier="material" ng-click="pushPage('')">
-        c
-        </ons-list-item>
-        <ons-list-item  modifier="material" ng-click="pushPage('')">
-        c
-        </ons-list-item>
-      </ons-list>
-    </ons-page>
-  </ons-splitter-side>
-  <ons-splitter-content page="home/index.html"></ons-splitter-content>
-</ons-splitter>
 <ons-template id="home/index.html">
     <ons-toolbar modifier="material">
       <div class="left">
