@@ -14,21 +14,29 @@
   </ons-splitter>
 
   <ons-template id="login/index.html">
-    <ons-page modifier="material" ng-controller="LoginController as login">
+    <ons-page modifier="material" ng-controller="LoginController as login" id="s_login">
       <ons-toolbar modifier="material">
         <div class="left">
           ログイン
         </div>
       </ons-toolbar>
+      <div class="form-back">
+        <div class="login-form">
+          <br>
+          <input id="email_or_screen_name" type="text" class="text-input--underbar" placeholder="ユーザー名またはメールアドレス" value="">
+          <br>
 
-      <div class="login-form">
-        <input id="email_or_screen_name" type="text" class="text-input--underbar" placeholder="ユーザー名またはメールアドレス" value="">
-        <br>
-        <input id="password" type="password" class="text-input--underbar" placeholder="password" value="">
+          <input id="password" type="password" class="text-input--underbar" placeholder="password" value="">
+
+        </div>
         <br><br>
-        <ons-button modifier="material" class="user-button" ng-click="login.user()">ログイン</ons-button>
-        <br><br>
+        <div class="user-button-back">
+          <ons-button modifier="material" class="user-button" ng-click="login.user()">ログイン</ons-button>
+        </div>
       </div>
+      <br>
+    
+
       <ons-list-item style="text-align: center;">
         <ons-button onclick="app.navi.resetToPage('./signup/index.html', {animation: 'slide'})" modifier="material--flat">
           <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
