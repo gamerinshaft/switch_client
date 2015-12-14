@@ -193,7 +193,10 @@
         error: function(error){
           if(error.status == 404 || error.status == 0){
             localStorage.setItem("switch-site_url","")
-            app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+            ons.notification.alert({
+              message: 'URLが間違っています！',
+              modifier: "material"
+            });
           }else{
             text = "<ul>";
             messages = error.responseJSON.meta.errors.forEach(function(err){
@@ -201,7 +204,7 @@
             });
             text += "</ul>"
             ons.notification.alert({
-              message: text
+              messageHTML: text
             });
           }
         }
@@ -224,9 +227,7 @@
           success: function(msg){
             console.log(msg)
             $timeout(function() {
-              msg["response"]["infrareds"].forEach(function(obj){
-                infraredModel.infrareds.push(obj)
-              })
+              infraredModel.infrareds = msg["response"]["infrareds"]
             })
           },
           error: function(error){
@@ -240,7 +241,7 @@
               });
               text += "</ul>"
               ons.notification.alert({
-                message: text
+                messageHTML: text
               });
             }
           }
@@ -257,9 +258,7 @@
           success: function(msg){
             console.log(msg)
             $timeout(function() {
-              msg["response"]["group"]["infrareds"].forEach(function(obj){
-                infraredModel.infrareds.push(obj)
-              })
+              infraredModel.infrareds = msg["response"]["group"]["infrareds"]
             })
           },
           error: function(error){
@@ -307,7 +306,98 @@
           }
         }
       });
-    }.bind(this)
+    }.bind(this);
+
+    this.new = function(){
+      ons.notification.confirm({
+        message: '赤外線を追加します',
+        modifier: 'material',
+        callback: function(answer) {
+          switch(answer){
+            case 0:
+              break;
+            case 1:
+              if(infraredModel.group.id == "all"){
+                group_id = ""
+              }else{
+                group_id = infraredModel.group.id.to_i
+              }
+              $("#receive_progress").html("<ons-progress indeterminate></ons-progress>");
+              $.ajax({
+                url: "" + site_url + "/api/v1/ir/receive.json",
+                type:"POST",
+                data: {
+                  "auth_token": localStorage.getItem('switch-auth_token'),
+                  "ir_id": group_id
+                },
+                success: function(msg){
+                  ir_id = parseInt(msg["response"]["infrared"]["id"])
+                  $("#receive_progress").html("");
+                  ons.notification.prompt({
+                    message: "赤外線名を入力してください",
+                    modifier: "material",
+                    callback: function(name) {
+                      $.ajax({
+                        url: "" + localStorage.getItem("switch-site_url") + "/api/v1/ir/rename.json",
+                        type: "PUT",
+                        data: {
+                          "name": name,
+                          "ir_id": ir_id,
+                          "auth_token": localStorage.getItem("switch-auth_token")
+                        },
+                        success: function(msg){
+                          console.log(msg)
+                          window.hoge = msg
+                          $timeout(function(){
+                            infraredModel.infrareds.push(msg["response"]["infrared"])
+                          })
+                          ons.notification.alert({
+                            message: '' + name + 'を追加しました！',
+                            modifier: "material"
+                          });
+                        },
+                        error: function(error){
+                          if(error.status == 404){
+                            localStorage.setItem("switch-site_url","")
+                            app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+                          }else{
+                            html = "<ul>";
+                            messages = error.responseJSON.meta.errors.forEach(function(err){
+                              html += "<li class='error'>" + err.message + "</li>";
+                            });
+                            html += "</ul>"
+                            ons.notification.alert({
+                              messageHTML: html
+                            });
+                          }
+                        }
+                      });
+                    }
+                  });
+                },
+                error: function(error){
+                  $("#receive_progress").html("");
+                  if(error.status == 404 || error.status == 0){
+                    localStorage.setItem("switch-site_url","")
+                    app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+                  }else{
+                    text = "<ul>";
+                    messages = error.responseJSON.meta.errors.forEach(function(err){
+                      text += "<li class='error'>" + err.message + "</li>";
+                    });
+                    text += "</ul>"
+                    ons.notification.alert({
+                      modifier: 'material',
+                      messageHTML: text
+                    });
+                  }
+                }
+              });
+              break;
+          }
+        }
+      })
+    }.bind(this);
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
     $scope.infraredGroupModel = infraredGroupModel;
@@ -321,6 +411,7 @@
         window.msg = msg
         console.log(msg)
         $timeout(function() {
+          infraredGroupModel.groups = [{name: "すべての赤外線", id: "all"}]
           msg["response"]["groups"].forEach(function(obj){
             infraredGroupModel.groups.push(obj)
           })
@@ -337,7 +428,7 @@
           });
           text += "</ul>"
           ons.notification.alert({
-            message: text
+            messageHTML: text
           });
         }
       }
