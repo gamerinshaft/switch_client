@@ -412,7 +412,7 @@
         window.msg = msg
         console.log(msg)
         $timeout(function() {
-          infraredGroupModel.groups = [{name: "すべての赤外線", id: "all"}]
+          infraredGroupModel.groups = [{name: "すべて", id: "all"}]
           msg["response"]["groups"].forEach(function(obj){
             infraredGroupModel.groups.push(obj)
           })
