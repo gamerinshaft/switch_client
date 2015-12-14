@@ -1,0 +1,11 @@
+#s_infrared .s_list{
+	width:100%;
+	margin:0 auto;
+}
+
+#s_infrared .infrared{
+	box-shadow: 1.5px 1px 1px 0.2px;
+	background-color:grey;
+	width:80%;
+	margin:8px auto;
+}

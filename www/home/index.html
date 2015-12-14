@@ -3,11 +3,21 @@
     <ons-page modifier="material" ng-controller="MenuController as menu">
       <ons-list modifier="material">
         <ons-list-header modifier="material">Menu</ons-list-header>
-        <ons-list-item modifier="material">
-          This is a menu.
-        </ons-list-item>
         <ons-list-item modifier="material" ng-click="menu.logout()" >
           ログアウト
+        </ons-list-item>
+        <ons-list-item  modifier="material" ng-click="pushToPage('../home/index.html',{animation:'slide'})">
+        Home
+        </ons-list-item>
+        <ons-list-item  modifier="material" ng-click="pushPage('')">
+        </ons-list-item>
+        <ons-list-item  modifier="material" ng-click="pushPage('')">
+        </ons-list-item>
+        <ons-list-item  modifier="material" ng-click="pushPage('')">
+        </ons-list-item>
+        <ons-list-item  modifier="material" ng-click="pushPage('')">
+        </ons-list-item>
+        <ons-list-item  modifier="material" ng-click="pushPage('')">
         </ons-list-item>
       </ons-list>
     </ons-page>
@@ -16,7 +26,7 @@
 </ons-splitter>
 
 <ons-template id="home/index.html">
-  <ons-page modifier="material" ng-controller="InfraredGroupController as ir">
+  <ons-page modifier="material" ng-controller="InfraredGroupController as ir" id ="s_group_list">
     <ons-toolbar modifier="material">
       <div class="left">
         <ons-toolbar-button ng-click="menu.open()" modifier="material">
@@ -26,7 +36,7 @@
       <div class="center">Switch</div>
     </ons-toolbar>
     <ons-progress indeterminate></ons-progress>
-    <ons-list modifier="material">
+    <ons-list modifier="material" class="s_list">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
       <ons-list-item id="group-{{group.id}}" ng-click="app.navi.pushPage('infrared/index.html', {group: group})" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">
         <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
