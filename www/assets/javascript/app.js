@@ -412,7 +412,7 @@
         window.msg = msg
         console.log(msg)
         $timeout(function() {
-          infraredGroupModel.groups = [{name: "すべての赤外線", id: "all"}]
+          infraredGroupModel.groups = [{name: "すべて", id: "all"}]
           msg["response"]["groups"].forEach(function(obj){
             infraredGroupModel.groups.push(obj)
           })
@@ -435,42 +435,55 @@
       }
     });
     this.newIrGroup = function() {
-      ons.notification.prompt({
-        message: "グループ名を入力してください",
-        modifier: "material",
-        callback: function(name) {
-          $.ajax({
-            url: "" + localStorage.getItem("switch-site_url") + "/api/v1/group.json",
-            type: "POST",
-            data: {
-              "name": name,
-              "auth_token": localStorage.getItem("switch-auth_token")
-            },
-            success: function(msg){
-              $timeout(function(){
-                infraredGroupModel.groups.push(msg["response"]["group"])
-              })
-              ons.notification.alert({
-                message: '' + name||undefined + 'を追加しました！',
-                modifier: "material"
+      ons.notification.confirm({
+        message: 'グループを作成します',
+        modifier: 'material',
+        callback: function(answer) {
+          switch(answer){
+            case 0:
+              break;
+            case 1:
+              ons.notification.prompt({
+                message: "グループ名を入力してください",
+                modifier: "material",
+                callback: function(name) {
+                  name = name
+                  $.ajax({
+                    url: "" + localStorage.getItem("switch-site_url") + "/api/v1/group.json",
+                    type: "POST",
+                    data: {
+                      "name": name,
+                      "auth_token": localStorage.getItem("switch-auth_token")
+                    },
+                    success: function(msg){
+                      $timeout(function(){
+                        infraredGroupModel.groups.push(msg["response"]["group"])
+                      })
+                      ons.notification.alert({
+                        message: '' + (name||undefined) + 'を追加しました！',
+                        modifier: "material"
+                      });
+                    },
+                    error: function(error){
+                      if(error.status == 404){
+                        localStorage.setItem("switch-site_url","")
+                        app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+                      }else{
+                        html = "<ul>";
+                        messages = error.responseJSON.meta.errors.forEach(function(err){
+                          html += "<li class='error'>" + err.message + "</li>";
+                        });
+                        html += "</ul>"
+                        ons.notification.alert({
+                          messageHTML: html
+                        });
+                      }
+                    }
+                  });
+                }
               });
-            },
-            error: function(error){
-              if(error.status == 404){
-                localStorage.setItem("switch-site_url","")
-                app.navi.resetToPage("./404/index.html", {animation: 'lift'})
-              }else{
-                html = "<ul>";
-                messages = error.responseJSON.meta.errors.forEach(function(err){
-                  html += "<li class='error'>" + err.message + "</li>";
-                });
-                html += "</ul>"
-                ons.notification.alert({
-                  messageHTML: html
-                });
-              }
-            }
-          });
+            break;
+          }
         }
       });
     }.bind(this);
