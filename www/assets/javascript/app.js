@@ -14,26 +14,7 @@
   })
   .factory('infraredGroupModel', function(){
     return {
-      groups: [{
-        title: 'Water the plants',
-        done: false,
-      },
-      {
-        title: 'Walk the dog',
-        done: true,
-      },
-      {
-        title: 'Go to the dentist',
-        done: false,
-      },
-      {
-        title: 'Buy milk',
-        done: false,
-      },
-      {
-        title: 'Play tennis',
-        done: true,
-      }]
+      groups: []
     }
   })
   .controller('MenuController', function($scope, $timeout){
@@ -97,7 +78,6 @@
             app.navi.pushPage("./home/index.html", {animation: 'slide'})
           },
           error: function(msg){
-            console.log(msg)
             if(msg.status == 404){
               localStorage.setItem("switch-site_url","")
               app.navi.pushToPage("./404/index.html", {animation: 'lift'})
@@ -231,6 +211,9 @@
       success: function(msg){
         window.msg = msg
         console.log(msg)
+        $timeout(function() {
+          infraredGroupModel.groups = msg["response"]["groups"]
+        })
       },
       error: function(error){
         if(error.status == 404 || error.status == 0){
@@ -253,11 +236,11 @@
     $scope.infraredGroupModel = infraredGroupModel;
     this.newIr = function() {
       // this.groups.push({
-      //   title: '',
+      //   name: '',
       //   done: false
       // });
       infraredGroupModel.groups.push({
-        title: '',
+        name: '',
         done: false
       });
     }.bind(this);
