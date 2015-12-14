@@ -1,8 +1,9 @@
 #s_signup .signup-form{
-	/*width: 200px;*/
+	width: 300px;
 	margin:0 auto;
 	text-align:center;
-	padding-top:190px;
+	padding-top:160px;
+
 }
 
 #s_signup .button-back{
@@ -12,11 +13,14 @@
 	margin-left: 64px;
 }
 #s_signup .tologin{
-	float:left ;
+	float:left;
 	margin-left: 20px;
-	padding-top: 180px;
+	padding-top: 170px;
 }
-
+#s_signup .tologinbutton{
+	margin-bottom:-20px;
+	/*padding-top: 170px;*/
+}
 #s_signup .clear{
 	clear: both;
 }
