@@ -2,6 +2,21 @@
 	/*width: 200px;*/
 	margin:0 auto;
 	text-align:center;
-	padding-top:160px;
+	padding-top:190px;
 }
 
+#s_signup .button-back{
+	float:left;
+	width: 100px;
+	text-align:center;
+	margin-left: 64px;
+}
+#s_signup .tologin{
+	float:left ;
+	margin-left: 20px;
+	padding-top: 180px;
+}
+
+#s_signup .clear{
+	clear: both;
+}
