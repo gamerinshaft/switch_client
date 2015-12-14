@@ -13,14 +13,12 @@
     }
   })
   .factory('infraredModel', function(){
-     return [{
+     return {
       group: {
         name: "名無し"
       },
-       infrareds: [{
-
-       }]
-     }]
+      infrareds: []
+      }
   })
   .factory('infraredGroupModel', function(){
     return {
@@ -214,12 +212,80 @@
 
   })
   .controller('InfraredController', function($scope, $timeout, infraredModel){
+    $scope.infraredModel = infraredModel;
     $timeout(function(){
       var options = app.navi.getCurrentPage().options;
       infraredModel.group = options.group
-      console.log(options.group.name)
+      if(options.group.id == "all"){
+        $.ajax({
+          url: "" + site_url + "/api/v1/ir.json",
+          type:"GET",
+          data: {
+            "auth_token": localStorage.getItem('switch-auth_token')
+          },
+          success: function(msg){
+            console.log(msg)
+            $timeout(function() {
+              msg["response"]["infrareds"].forEach(function(obj){
+                infraredModel.infrareds.push(obj)
+              })
+            })
+          },
+          error: function(error){
+            if(error.status == 404 || error.status == 0){
+              ons.notification.alert({
+                message: '入力したURLが間違っています。'
+              });
+              localStorage.setItem("switch-site_url","")
+            }else{
+              text = "<ul>";
+              messages = error.responseJSON.meta.errors.forEach(function(err){
+                text += "<li class='error'>" + err.message + "</li>";
+              });
+              text += "</ul>"
+              ons.notification.alert({
+                message: text
+              });
+            }
+          }
+        });
+      }else{
+        id = parseInt(options.group.id)
+        $.ajax({
+          url: "" + site_url + "/api/v1/group/ir.json",
+          type:"GET",
+          data: {
+            "auth_token": localStorage.getItem('switch-auth_token'),
+            "group_id": id
+          },
+          success: function(msg){
+            console.log(msg)
+            $timeout(function() {
+              msg["response"]["group"]["infrareds"].forEach(function(obj){
+                infraredModel.infrareds.push(obj)
+              })
+            })
+          },
+          error: function(error){
+            if(error.status == 404 || error.status == 0){
+              ons.notification.alert({
+                message: '入力したURLが間違っています。'
+              });
+              localStorage.setItem("switch-site_url","")
+            }else{
+              text = "<ul>";
+              messages = error.responseJSON.meta.errors.forEach(function(err){
+                text += "<li class='error'>" + err.message + "</li>";
+              });
+              text += "</ul>"
+              ons.notification.alert({
+                message: text
+              });
+            }
+          }
+        });
+      }
     })
-    $scope.infraredModel = infraredModel;
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
     $scope.infraredGroupModel = infraredGroupModel;
