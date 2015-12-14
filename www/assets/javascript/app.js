@@ -14,7 +14,7 @@
   })
   .factory('infraredGroupModel', function(){
     return {
-      items: [{
+      groups: [{
         title: 'Water the plants',
         done: false,
       },
@@ -222,13 +222,41 @@
 
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
+    $.ajax({
+      url: "" + site_url + "/api/v1/group.json",
+      type:"GET",
+      data: {
+        "auth_token": localStorage.getItem('switch-auth_token')
+      },
+      success: function(msg){
+        window.msg = msg
+        console.log(msg)
+      },
+      error: function(error){
+        if(error.status == 404 || error.status == 0){
+          ons.notification.alert({
+            message: '入力したURLが間違っています。'
+          });
+          localStorage.setItem("switch-site_url","")
+        }else{
+          text = "<ul>";
+          messages = error.responseJSON.meta.errors.forEach(function(err){
+            text += "<li class='error'>" + err.message + "</li>";
+          });
+          text += "</ul>"
+          ons.notification.alert({
+            message: text
+          });
+        }
+      }
+    });
     $scope.infraredGroupModel = infraredGroupModel;
     this.newIr = function() {
-      // this.items.push({
+      // this.groups.push({
       //   title: '',
       //   done: false
       // });
-      infraredGroupModel.items.push({
+      infraredGroupModel.groups.push({
         title: '',
         done: false
       });
@@ -243,10 +271,10 @@
     }
 
     this.clearCompleted = function() {
-      // this.items = this.items.filter(function(item) {
+      // this.groups = this.groups.filter(function(item) {
       //   return !item.done;
       // });
-      infraredGroupModel.items = infraredGroupModel.items.filter(function(item) {
+      infraredGroupModel.groups = infraredGroupModel.groups.filter(function(item) {
         return !item.done;
       });
     }.bind(this);

@@ -28,23 +28,23 @@
 
     <ons-list modifier="material">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
-      <ons-list-item modifier="material" ng-repeat="item in infraredGroupModel.items">
+      <ons-list-item modifier="material" ng-repeat="group in infraredGroupModel.groups">
         <label class="checkbox checkbox--material">
-          <input type="checkbox" ng-model="item.done" class="checkbox__input checkbox--material__input">
+          <input type="checkbox" ng-model="group.done" class="checkbox__input checkbox--material__input">
           <div class="checkbox__checkmark checkbox--material__checkmark"></div>
         </label>
-        <ons-material-input label="Title" type="text" ng-show="todo.selectedItem == $index" ng-model="item.title" ng-blur="todo.selectedItem = -1"></ons-material-input>
-        <span id="todo-title" class="title" ng-class="{ 'done': item.done }" ng-hide="todo.selectedItem == $index" ng-click="todo.selectedItem = $index; todo.focusInput($event)">{{ item.title || 'Untitled item' }}</span>
+        <ons-material-input label="Title" type="text" ng-show="ir.selectedItem == $index" ng-model="group.title" ng-blur="ir.selectedItem = -1"></ons-material-input>
+        <span id="ir-title" class="title" ng-class="{ 'done': group.done }" ng-hide="ir.selectedItem == $index" ng-click="ir.selectedItem = $index; ir.focusInput($event)">{{ group.title || 'Untitled item' }}</span>
       </ons-list-item>
       <ons-list-item style="text-align: center;">
-        <ons-button ng-click="todo.clearCompleted()" modifier="material--flat">
+        <ons-button ng-click="ir.clearCompleted()" modifier="material--flat">
         <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
-        Clear completed items
+        Clear completed groups
       </ons-button>
       </ons-list-item>
     </ons-list>
 
-    <ons-fab position="bottom right" ng-click="todo.newTodo()">
+    <ons-fab position="bottom right" ng-click="ir.newIr()">
       <ons-ripple color="rgba(255, 255, 255, 0.2)"></ons-ripple>
       <ons-icon icon="md-plus" size="24px" style="line-height: 56px;"></ons-icon>
     </ons-fab>
