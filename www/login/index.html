@@ -22,14 +22,15 @@
       </ons-toolbar>
       <div class="form-back">
         <div class="login-form">
-          <br>
-          <input id="email_or_screen_name" type="text" class="text-input--underbar" placeholder="ユーザー名またはメールアドレス" value="" size="32">
-          <br>
-
-          <input id="password" type="password" class="text-input--underbar" placeholder="password" value=""size="32">
-
+          <ul class="list">
+            <li class="list__item">
+              <input id="email_or_screen_name" type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="ユーザー名またはメールアドレス">
+            </li>
+            <li class="list__item">
+              <input id="password" type="password" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="パスワード">
+            </li>
+          </ul>
         </div>
-        <br><br>
         <div class="box">
         <div style="height:210px"></div>
         <ons-button onclick="app.navi.resetToPage('./signup/index.html', {animation: 'slide'})" modifier="material--flat" class="tosignup">
@@ -43,7 +44,7 @@
         <div class="clear"></div>
       </div>
       <br>
-    
+
 
     </ons-page>
   </ons-template>
