@@ -24,7 +24,7 @@
     return {
       groups: [{
         id: "all",
-        name: "すべての赤外線"
+        name: "すべて"
       }]
     }
   })

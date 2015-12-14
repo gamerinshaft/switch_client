@@ -45,19 +45,42 @@
     <ons-list modifier="material" class="s_list">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
       <ons-list-item modifier="material" id="group-{{group.id}}"  class="infrared_group" ng-repeat="group in infraredGroupModel.groups">
-        <ons-carousel style="width: 100%; height: 200px" swipeable>
-          <ons-carousel-item ng-click="app.navi.pushPage('infrared/index.html', {group: group})">
+      <div ng-if="group.name == 'すべて'" >
+        <ons-carousel style="width: 100%; height: 25px" disabled>
+          <ons-carousel-item ng-click="app.navi.pushPage('infrared/index.html', {group: group})"
+          >
             {{ group.name || 'Untitled item' }}
           </ons-carousel-item>
-          <ons-carousel-item>
-            <label class="radio-button radio-button--material">
-
-              <input type="radio" class="radio-button__input radio-button--material__input" name="b" >
-              <div class="radio-button__checkmark
-                radio-button--material__checkmark"></div>
-            </label>
+          <ons-carousel-item >
+            <ons-button modifier="quiet" ng-click="group.rename(group)">
+              <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
+              リネーム
+            </ons-button>
+            <ons-button modifier="quiet" ng-click="group.delete()">
+              <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
+              削除
+            </ons-button>
           </ons-carousel-item>
         </ons-carousel>
+      </div>
+      <div ng-if="group.name != 'すべて'" >
+        <ons-carousel style="width: 100%; height: 25px" swipeable>
+          <ons-carousel-item ng-click="app.navi.pushPage('infrared/index.html', {group: group})"
+          >
+            {{ group.name || 'Untitled item' }}
+          </ons-carousel-item>
+          <ons-carousel-item >
+            <ons-button modifier="quiet" ng-click="group.rename(group)">
+              <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
+              リネーム
+            </ons-button>
+            <ons-button modifier="quiet" ng-click="group.delete()">
+              <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
+              削除
+            </ons-button>
+          </ons-carousel-item>
+        </ons-carousel>
+      </div>
       </ons-list-item>
       <ons-list-item style="text-align: center;">
         <ons-button ng-click="ir.clearCompleted()" modifier="material--flat">
