@@ -400,6 +400,107 @@
         }
       })
     }.bind(this);
+    this.rename = function(infrared) {
+      ons.notification.confirm({
+        message: '赤外線名を変更します',
+        modifier: 'material',
+        callback: function(answer) {
+          switch(answer){
+            case 0:
+              break;
+            case 1:
+              ons.notification.prompt({
+                message: "新しい名前を入力してください",
+                modifier: "material",
+                callback: function(name) {
+                  name = name
+                  console.log(infrared.id)
+                  $.ajax({
+                    url: "" + localStorage.getItem("switch-site_url") + "/api/v1/ir/rename.json",
+                    type: "PUT",
+                    data: {
+                      "ir_id": parseInt(infrared.id),
+                      "name": name,
+                      "auth_token": localStorage.getItem("switch-auth_token")
+                    },
+                    success: function(msg){
+                      $timeout(function(){
+                        infrared.name = msg["response"]["infrared"]["name"]
+                      })
+                      ons.notification.alert({
+                        message: '' + (name||undefined) + 'に変更しました！',
+                        modifier: "material"
+                      });
+                    },
+                    error: function(error){
+                      if(error.status == 404){
+                        localStorage.setItem("switch-site_url","")
+                        app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+                      }else{
+                        html = "<ul>";
+                        messages = error.responseJSON.meta.errors.forEach(function(err){
+                          html += "<li class='error'>" + err.message + "</li>";
+                        });
+                        html += "</ul>"
+                        ons.notification.alert({
+                          messageHTML: html
+                        });
+                      }
+                    }
+                  });
+                }
+              });
+            break;
+          }
+        }
+      });
+    }.bind(this)
+    this.delete = function(infrared,index) {
+      ons.notification.confirm({
+        message: 'グループを削除します',
+        modifier: 'material',
+        callback: function(answer) {
+          switch(answer){
+            case 0:
+              break;
+            case 1:
+              $.ajax({
+                url: "" + localStorage.getItem("switch-site_url") + "/api/v1/ir.json",
+                type: "DELETE",
+                data: {
+                  "ir_id": parseInt(infrared.id),
+                  "auth_token": localStorage.getItem("switch-auth_token")
+                },
+                success: function(msg){
+                  $timeout(function(){
+                    infraredModel.infrareds.splice(index,1)
+                  })
+                  ons.notification.alert({
+                    message: '' + (infrared.name||undefined) + 'を削除しました',
+                    modifier: "material"
+                  });
+                },
+                error: function(error){
+                  if(error.status == 404){
+                    localStorage.setItem("switch-site_url","")
+                    app.navi.resetToPage("./404/index.html", {animation: 'lift'})
+                  }else{
+                    html = "<ul>";
+                    messages = error.responseJSON.meta.errors.forEach(function(err){
+                      html += "<li class='error'>" + err.message + "</li>";
+                    });
+                    html += "</ul>"
+                    ons.notification.alert({
+                      messageHTML: html
+                    });
+                  }
+                }
+              });
+            break;
+          }
+        }
+      });
+    }.bind(this)
   })
   .controller('InfraredGroupController', function($scope, $timeout, infraredGroupModel) {
     $scope.infraredGroupModel = infraredGroupModel;
