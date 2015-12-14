@@ -9,11 +9,6 @@
         <ons-list-item modifier="material" ng-click="menu.logout()" >
           ログアウト
         </ons-list-item>
-        <ons-list-item modifier="material" onclick="app.navi.resetToPage('home/index.html')">
-            home.html
-          <ons-icon icon="ion-home"></ons-icon>
-        </ons-list-item>
-
       </ons-list>
     </ons-page>
   </ons-splitter-side>
@@ -21,6 +16,7 @@
 </ons-splitter>
 
 <ons-template id="infrared/index.html">
+  <ons-page modifier="material" ng-controller="InfraredController as ir"id = "s_infrared">
     <ons-toolbar modifier="material">
       <div class="left">
         <ons-toolbar-button ng-click="menu.open()" modifier="material">
@@ -29,7 +25,7 @@
       </div>
       <div class="center">Switch</div>
     </ons-toolbar>
-  <ons-page modifier="material" ng-controller="InfraredController as ir"id="s_infrared">
+    <ons-progress indeterminate></ons-progress>
     <ons-list modifier="material">
       <ons-list-header modifier="material">{{infraredModel.group.name}}の赤外線一覧</ons-list-header>
       <ons-list-item id="infrared-{{infrared.id}}" class="infrared" modifier="material" ng-repeat="infrared in infraredModel.infrareds">
