@@ -7,7 +7,7 @@
 
 #s_login .login-form{
 	margin:0 auto;
-	/*width:200px;*/
+	width:300px;
 	text-align:center;
 }
 
@@ -21,12 +21,19 @@
 #s_login .box{
 	float:left;
 	margin-left:24px;
+	padding-top:220px;
 }
 #s_login .tosignup{
-
+	margin-bottom:-20px;
 }
 
 #s_login .clear{
 	clear: both;
 
+}
+#s_login .login-form ul{
+	overflow:hidden;
+}
+#s_login .login-form ul li{
+	/*margin-top:-1px*/
 }

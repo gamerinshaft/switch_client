@@ -18,7 +18,7 @@
         a
         </ons-list-item>
         <ons-list-item  modifier="material" ng-click="pushPage('')">
-        b
+        b 
         </ons-list-item>
         <ons-list-item  modifier="material" ng-click="pushPage('')">
         c
@@ -33,7 +33,7 @@
 </ons-splitter>
 <ons-template id="home/index.html">
     <ons-toolbar modifier="material">
-      <div class="lefte">
+      <div class="left">
         <ons-toolbar-button ng-click="menu.open()" modifier="material">
           <ons-icon icon="md-menu"></ons-icon>
         </ons-toolbar-button>
@@ -41,23 +41,11 @@
       <div class="center">Switch</div>
     </ons-toolbar>
   <ons-page modifier="material" ng-controller="InfraredGroupController as ir" id ="s_group_list">
-
     <ons-list modifier="material" class="s_list">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
-      <ons-list-item modifier="material" id="group-{{group.id}}"  class="infrared_group" ng-repeat="group in infraredGroupModel.groups">
-        <ons-carousel style="width: 100%; height: 200px" swipeable>
-          <ons-carousel-item ng-click="app.navi.pushPage('infrared/index.html', {group: group})">
-            {{ group.name || 'Untitled item' }}
-          </ons-carousel-item>
-          <ons-carousel-item>
-            <label class="radio-button radio-button--material">
-
-              <input type="radio" class="radio-button__input radio-button--material__input" name="b" >
-              <div class="radio-button__checkmark
-                radio-button--material__checkmark"></div>
-            </label>
-          </ons-carousel-item>
-        </ons-carousel>
+      <ons-list-item id="group-{{group.id}}" ng-click="app.navi.pushPage('infrared/index.html', {group: group})" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">
+        <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
+        {{ group.name || 'Untitled item' }}
       </ons-list-item>
       <ons-list-item style="text-align: center;">
         <ons-button ng-click="ir.clearCompleted()" modifier="material--flat">
