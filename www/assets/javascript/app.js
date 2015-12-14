@@ -255,7 +255,7 @@
                 infraredGroupModel.groups.push(msg["response"]["group"])
               })
               ons.notification.alert({
-                message: '' + name + 'を追加しました！',
+                message: '' + name||undefined + 'を追加しました！',
                 modifier: "material"
               });
             },
