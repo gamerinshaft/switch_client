@@ -41,7 +41,6 @@
       <div class="center">Switch</div>
     </ons-toolbar>
   <ons-page modifier="material" ng-controller="InfraredGroupController as ir" id ="s_group_list">
-    <ons-progress indeterminate></ons-progress>
     <ons-list modifier="material" class="s_list">
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
       <ons-list-item id="group-{{group.id}}" ng-click="app.navi.pushPage('infrared/index.html', {group: group})" class="infrared_group" modifier="material" ng-repeat="group in infraredGroupModel.groups">

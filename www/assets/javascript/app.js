@@ -214,6 +214,7 @@
   })
   .controller('InfraredController', function($scope, $timeout, infraredModel){
     $scope.infraredModel = infraredModel;
+    infraredModel.infrareds = "";
     $timeout(function(){
       var options = app.navi.getCurrentPage().options;
       infraredModel.group = options.group
