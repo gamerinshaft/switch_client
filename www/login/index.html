@@ -22,15 +22,19 @@
       </ons-toolbar>
 
       <div class="login-form">
-        <span id="error_messages"></span>
         <input id="email_or_screen_name" type="text" class="text-input--underbar" placeholder="ユーザー名またはメールアドレス" value="">
         <br>
-        <input id="login-password" type="password" class="text-input--underbar" placeholder="password" value="">
+        <input id="password" type="password" class="text-input--underbar" placeholder="password" value="">
         <br><br>
         <ons-button modifier="material" class="user-button" ng-click="login.user()">ログイン</ons-button>
         <br><br>
       </div>
-
+      <ons-list-item style="text-align: center;">
+        <ons-button onclick="app.navi.resetToPage('./signup/index.html', {animation: 'slide'})" modifier="material--flat">
+          <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
+          新規登録はこちら
+        </ons-button>
+      </ons-list-item>
     </ons-page>
   </ons-template>
 </ons-navigator>
