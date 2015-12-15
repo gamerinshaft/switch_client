@@ -1,19 +1,24 @@
 #s_infrared .s_list{
 	width:100%;
 	margin:0 auto;
+	background-color:#C2EACA;
 }
 
 #s_infrared .infrared{
 	box-shadow: 1.5px 1px 1px 0.2px;
-	background-color:grey;
+	background-color:rgb(240,240,240);
 	width:80%;
 	margin:8px auto;
 }
 
-#s_infrared .s_carousel {
-
-}
-
-#s_infrared .clear{
-
+#s_infrared .carouselslide{
+	position:absolute;
+	width:100%;
+	visibility:visible;
+	left:100%;
+	transform: translate3d(-54px,0px,0px);
+	height:22px;
+	padding-top:15px;
+	padding-bottom:15px;
+	
 }

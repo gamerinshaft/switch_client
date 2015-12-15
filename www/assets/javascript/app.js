@@ -218,7 +218,9 @@
     infraredModel.infrareds = "";
     $timeout(function(){
       var options = app.navi.getCurrentPage().options;
+      console.log(options)
       infraredModel.group = options.group
+      console.log(options.group.id)
       if(options.group.id == "all"){
         $.ajax({
           url: "" + site_url + "/api/v1/ir.json",
@@ -322,7 +324,7 @@
               if(infraredModel.group.id == "all"){
                 group_id = ""
               }else{
-                group_id = infraredModel.group.id.to_i
+                group_id = parseInt(infraredModel.group.id)
               }
               $("#receive_progress").html("<ons-progress indeterminate></ons-progress>");
               $.ajax({
@@ -330,7 +332,7 @@
                 type:"POST",
                 data: {
                   "auth_token": localStorage.getItem('switch-auth_token'),
-                  "ir_id": group_id
+                  "group_id": group_id
                 },
                 success: function(msg){
                   ir_id = parseInt(msg["response"]["infrared"]["id"])
