@@ -322,7 +322,7 @@
               break;
             case 1:
               if(infraredModel.group.id == "all"){
-                group_id = ""
+                group_id =  undefined
               }else{
                 group_id = parseInt(infraredModel.group.id)
               }
