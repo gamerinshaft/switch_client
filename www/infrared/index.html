@@ -28,16 +28,15 @@
     <ons-list modifier="material" class="s_list">
       <ons-list-header modifier="material">{{infraredModel.group.name}}の赤外線一覧</ons-list-header>
       <ons-list-item id="infrared-{{infrared.id}}" class="infrared" modifier="material" ng-repeat="infrared in infraredModel.infrareds"style="padding:0;">
-        <div style="display: inline-block; width: 80%;padding-top:10px;padding-bottom:10px;" ng-click='ir.send(infrared.id)'>
-          <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
+        <div style="display: inline-block; width: 80%;padding-top:10px;padding-bottom:10px;padding-left:20px;" ng-click='ir.send(infrared.id)'>
           {{ infrared.name || 'Untitled item' }}
         </div>
-        <ons-carousel swipeable style="display:inline-block; width: 18%;position:absolute;top:0;right:0;bottom:0;"item-width="90%" class="s_carousel">
+        <ons-carousel swipeable style="display:inline-block; width: 18%;position:absolute;top:0;right:0;bottom:0;"item-width="100%" class="s_carousel" >
           <ons-carousel-item >
           </ons-carousel-item>
           <ons-carousel-item class="carouselslide">
-            <ons-icon style="padding-left:6px;padding-right:3px;color:#009688;"icon="ion-compose"size="20px" ng-click='ir.rename(infrared)'></ons-icon>
-            <ons-icon icon="ion-ios-trash" ng-click="ir.delete(infrared,$index)"size="20px"style="color:#009688"></ons-icon>
+            <ons-icon style="padding-left:5px;padding-right:3px;color:#009688;"icon="ion-compose"size="23px" ng-click='ir.rename(infrared)'></ons-icon>
+            <ons-icon icon="ion-ios-trash" ng-click="ir.delete(infrared,$index)"size="23px"style="color:#009688"></ons-icon>
 
           </ons-carousel-item>
         </ons-carousel>

@@ -45,15 +45,20 @@
       <ons-list-header modifier="material">赤外線グループ一覧</ons-list-header>
       <ons-list-item modifier="material" id="group-{{group.id}}"  class="infrared_group" ng-repeat="group in infraredGroupModel.groups"style="padding:0;">
       <div ng-if="group.name == 'すべて'" >
-        <ons-carousel style="width: 100%; height: 25px" >
+        <div style="display:inline-block;width:80%; padding-top:10px;padding-bottom:10px;padding-left:20px" ng-click="app.navi.pushPage('infrared/index.html', {group: group})"
+          >
+            {{ group.name || 'Untitled item' }}
+          </div>
+ <!--        <ons-carousel style="width: 100%; height: 25px" >
           <ons-carousel-item ng-click="app.navi.pushPage('infrared/index.html', {group: group})"
           >
             {{ group.name || 'Untitled item' }}
           </ons-carousel-item>
-        </ons-carousel>
+        </ons-carousel> -->
+
       </div>
       <div ng-if="group.name != 'すべて'" >
-          <div style="display:inline-block;width:80%; padding-top:10px;padding-bottom:10px;" ng-click="app.navi.pushPage('infrared/index.html', {group: group})"
+          <div style="display:inline-block;width:80%; padding-top:10px;padding-bottom:10px;padding-left:20px" ng-click="app.navi.pushPage('infrared/index.html', {group: group})"
           >
             {{ group.name || 'Untitled item' }}
           </div>
