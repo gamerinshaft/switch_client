@@ -39,6 +39,8 @@
         </ons-toolbar-button>
       </div>
       <div class="center">Switch</div>
+      <div class="temperature-back">
+      </div>
     </ons-toolbar>
   <ons-page modifier="material" ng-controller="InfraredGroupController as ir" id ="s_group_list">
     <ons-list modifier="material" class="s_list">
@@ -67,7 +69,7 @@
           </ons-carousel-item>
           <ons-carousel-item class="carouselslide">
              <ons-icon style="padding-left:5px;padding-right:3px; color:#009688;"icon="ion-compose"size="23px" ng-click='ir.rename(infrared)'></ons-icon>
-            <ons-icon style="color:#009688;"icon="ion-ios-trash" ng-click="ir.delete(infrared,$index)" size="23px"></ons-icon>
+            <ons-icon style="color:#009688;"icon="ion-ios-trash" ng-click="ir.delete(group,$index)" size="23px"></ons-icon>
           </ons-carousel-item>
         </ons-carousel>
       </div>
