@@ -1,8 +1,22 @@
+#s_signup .logo-back{
+	width:300px;
+	margin:0 auto;
+}
+
+#s_signup .logo-back .logo {
+	width:300px;
+	padding-top:80px;
+	/*margin-right:80px;*/
+}
+#s_signup .logo-back .logo img{
+	width: 250px;
+	margin-left:20px;
+}
 #s_signup .signup-form{
 	width: 300px;
 	margin:0 auto;
 	text-align:center;
-	padding-top:160px;
+	padding-top:20px;
 
 }
 
@@ -15,7 +29,7 @@
 #s_signup .tologin{
 	float:left;
 	margin-left: 20px;
-	padding-top: 170px;
+	padding-top: 120px;
 }
 #s_signup .tologinbutton{
 	margin-bottom:-20px;

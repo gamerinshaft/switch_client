@@ -1,7 +1,21 @@
+#s_login .logo-back{
+	width:300px;
+	margin:0 auto;
+}
+
+#s_login .logo-back .logo {
+	width:300px;
+	padding-top:80px;
+	/*margin-right:80px;*/
+}
+#s_login .logo-back .logo img{
+	width: 250px;
+	margin-left:20px;
+}
 #s_login .form-back{
 	width:100%;
 	/*height:80px;*/
-	padding-top:200px;
+	padding-top:60px;
 }
 
 
@@ -21,7 +35,7 @@
 #s_login .box{
 	float:left;
 	margin-left:24px;
-	padding-top:220px;
+	padding-top:180px;
 }
 #s_login .tosignup{
 	margin-bottom:-20px;
