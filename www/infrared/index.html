@@ -28,36 +28,17 @@
     <ons-list modifier="material">
       <ons-list-header modifier="material">{{infraredModel.group.name}}の赤外線一覧</ons-list-header>
       <ons-list-item id="infrared-{{infrared.id}}" class="infrared" modifier="material" ng-repeat="infrared in infraredModel.infrareds">
-        <ons-carousel item-width="60%"style="height: 25px" swipeable>
-          <ons-carousel-item ng-click='ir.send(infrared.id)'style="" >
-            <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
-            {{ infrared.name || 'Untitled item' }}
-          </ons-carousel-item>
-          <ons-carousel-item style="margin-left:100px;left:50%;">
-            <ons-button modifier="quiet" ng-click="ir.rename(infrared)" style="">
-              <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
-              <ons-icon icon="ion-compose" ng-click="ir.rename(infrared)"></ons-icon>
-            </ons-button>
-            <ons-button modifier="quiet" ng-click="ir.delete(infrared,$index)">
-              <ons-ripple color="rgba(0, 150, 136, 0.1)"></ons-ripple>
-
-              <ons-icon icon="ion-ios-trash" ng-click="ir.delete(infrared.$index)"></ons-icon>
-
-            </ons-button>
-          </ons-carousel-item>
-        </ons-carousel>
-      </ons-list-item>
-      <ons-list-item class="infrared">
-        <div style="display: inline-block; width: 80%;">
-          aaa
+        <div style="display: inline-block; width: 80%;" ng-click='ir.send(infrared.id)'>
+          <ons-ripple color="rgba(0, 0, 0, 0.2)"></ons-ripple>
+          {{ infrared.name || 'Untitled item' }}
         </div>
-        <ons-carousel swipeable style="height: 28px; display:inline-block; width: 16%;"item-width="90%" class="s_carousel">
+        <ons-carousel swipeable style="height: 20px; display:inline-block; width: 16%;"item-width="90%" class="s_carousel">
           <ons-carousel-item >
-          bbb
+          
           </ons-carousel-item>
-          <ons-carousel-item style="text-align:center;padding-top-">
-            <ons-icon style="padding-left:3px;padding-right:5px; vertical-align:-4%;"icon="ion-compose"size="20"></ons-icon>
-            <ons-icon icon="ion-ios-trash" style="vertical-align:-4%"></ons-icon>
+          <ons-carousel-item style="text-align:center;height:1px">
+            <ons-icon style="padding-left:3px;padding-right:5px;"icon="ion-compose"size="20" ng-click='ir.rename(infrared)'></ons-icon>
+            <ons-icon icon="ion-ios-trash" ng-click="ir.delete('infrared')"></ons-icon>
 
           </ons-carousel-item>
         </ons-carousel>
